@@ -2,29 +2,26 @@ version: '3.8'
 
 services:
   server:
-    build: ./server
+    # build: ./server  <-- Commented out for production usage
+    image: ghcr.io/lavizcachamza/trucochampions-server:latest
     container_name: vizcacha-server
     ports:
       - "3001:3001"
     environment:
       - PORT=3001
-      # Note: We use host.docker.internal or service name if internal, 
-      # but since we use Supabase (External), we pass the env file
     env_file:
       - ./server/.env
-    volumes:
-      - ./server:/app
-      - /app/node_modules
+    # volumes:
+    #   - ./server:/app       <-- Not needed if using image
+    #   - /app/node_modules
 
   client:
-    build: ./client
+    # build: ./client
+    image: ghcr.io/lavizcachamza/trucochampions-client:latest
     container_name: vizcacha-client
     ports:
       - "5173:5173"
     environment:
       - VITE_API_URL=http://localhost:3001
-    volumes:
-      - ./client:/app
-      - /app/node_modules
     depends_on:
       - server
