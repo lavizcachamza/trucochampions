@@ -14,7 +14,7 @@ const Teams = () => {
 
     const fetchTeams = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/teams');
+            const res = await axios.get(`${API_URL}/api/teams`);
             setTeams(res.data);
         } catch (err) {
             console.error(err);
@@ -26,7 +26,7 @@ const Teams = () => {
     const handleStatusChange = async (id, currentStatus) => {
         const newStatus = currentStatus === 'checkin' ? 'inscripto' : 'checkin';
         try {
-            await axios.put(`http://localhost:3001/api/teams/${id}/status`, { status: newStatus });
+            await axios.put(`${API_URL}/api/teams/${id}/status`, { status: newStatus });
             fetchTeams(); // Refresh
         } catch (err) {
             alert('Error al actualizar estado');

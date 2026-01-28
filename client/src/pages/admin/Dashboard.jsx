@@ -25,7 +25,7 @@ const Dashboard = () => {
 
     const fetchTeams = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/teams');
+            const res = await axios.get(`${API_URL}/api/teams`);
             setTeams(res.data);
         } catch (err) {
             console.error(err);
