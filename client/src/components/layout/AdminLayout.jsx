@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Trophy, LogOut } from 'lucide-react';
+import { LayoutDashboard, Users, Trophy, Calendar, LogOut } from 'lucide-react';
 
 const AdminLayout = () => {
     const navigate = useNavigate();
@@ -27,6 +27,7 @@ const AdminLayout = () => {
         { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
         { icon: Users, label: 'Equipos / Check-in', path: '/admin/equipos' },
         { icon: Trophy, label: 'Fixture & Live', path: '/admin/fixture' },
+        { icon: Calendar, label: 'Eventos', path: '/admin/eventos' },
     ];
 
     return (

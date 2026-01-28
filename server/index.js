@@ -26,11 +26,13 @@ const teamsRouter = require('./routes/teams');
 const { router: adminRouter } = require('./routes/admin');
 const roundsRouter = require('./routes/rounds');
 const matchesRouter = require('./routes/matches')(io);
+const eventsRouter = require('./routes/events');
 
 app.use('/api/teams', teamsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/rounds', roundsRouter);
 app.use('/api/matches', matchesRouter);
+app.use('/api/events', eventsRouter);
 
 app.get('/', (req, res) => {
   res.send('La Vizcacha API is running 🟢');
