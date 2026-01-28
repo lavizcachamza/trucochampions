@@ -15,8 +15,10 @@ const Register = () => {
         email: '',
         phone: '',
         institution: '',
+        event_id: '',
         players: []
     });
+    const [events, setEvents] = useState([]);
 
     // Helper to init players based on category
     const initPlayers = (cat) => {
@@ -31,10 +33,24 @@ const Register = () => {
 
     // Run once on mount or category change
     React.useEffect(() => {
+        fetchEvents();
         if (formData.players.length === 0) {
             initPlayers(formData.category);
         }
     }, []);
+
+    const fetchEvents = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/api/events`);
+            const activeEvents = res.data.filter(e => e.status === 'active');
+            setEvents(activeEvents);
+            if (activeEvents.length > 0 && !formData.event_id) {
+                setFormData(prev => ({ ...prev, event_id: activeEvents[0].id }));
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -146,6 +162,24 @@ const Register = () => {
                                             placeholder="Ej: Los Reyes del Envido"
                                             required
                                         />
+                                    </div>
+
+                                    <div className="col-span-1 md:col-span-2">
+                                        <label className="block text-sm font-medium text-slate-700 mb-1">Evento</label>
+                                        <select
+                                            name="event_id"
+                                            value={formData.event_id}
+                                            onChange={handleChange}
+                                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+                                            required
+                                        >
+                                            <option value="">-- Seleccionar Evento --</option>
+                                            {events.map((event) => (
+                                                <option key={event.id} value={event.id}>
+                                                    {event.title} - {new Date(event.date).toLocaleDateString('es-AR')}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
 
                                     <div>
