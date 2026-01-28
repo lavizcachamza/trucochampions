@@ -22,6 +22,6 @@ services:
     ports:
       - "8085:5173"
     environment:
-      - VITE_API_URL=http://localhost:3011
+      - VITE_API_URL=https://trucochamp.mansaoferta.com.ar/api
     depends_on:
       - server

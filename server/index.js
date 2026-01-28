@@ -11,13 +11,35 @@ const server = http.createServer(app);
 // Socket.io setup with CORS
 const io = new Server(server, {
   cors: {
-    origin: "*", // TODO: Restrict in production
-    methods: ["GET", "POST"]
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:8085',
+      'https://trucochamp.mansaoferta.com.ar'
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
 // Middleware
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:8085',
+  'https://trucochamp.mansaoferta.com.ar'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 
