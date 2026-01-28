@@ -6,7 +6,7 @@ services:
     image: ghcr.io/lavizcachamza/trucochampions-server:latest
     container_name: vizcacha-server
     ports:
-      - "3001:3001"
+      - "3011:3001"
     environment:
       - PORT=3001
     env_file:
@@ -20,8 +20,8 @@ services:
     image: ghcr.io/lavizcachamza/trucochampions-client:latest
     container_name: vizcacha-client
     ports:
-      - "5173:5173"
+      - "8085:5173"
     environment:
-      - VITE_API_URL=http://localhost:3001
+      - VITE_API_URL=http://localhost:3011
     depends_on:
       - server
