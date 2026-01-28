@@ -14,7 +14,6 @@ const Register = () => {
         category: 'Pareja', // Default
         email: '',
         phone: '',
-        institution: '',
         event_id: '',
         players: []
     });
@@ -26,7 +25,7 @@ const Register = () => {
         const currentPlayers = [...formData.players];
         // Resize array to match category count, preserving existing data
         const newPlayers = Array(count).fill(null).map((_, i) => currentPlayers[i] || {
-            name: '', age: '', level: 'Intermedio', email: '', phone: '', dni: ''
+            name: '', age: '', level: 'Intermedio', email: '', phone: ''
         });
         setFormData(prev => ({ ...prev, category: cat, players: newPlayers }));
     };
@@ -196,18 +195,6 @@ const Register = () => {
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-medium text-slate-700 mb-1">Institución / Empresa (Opcional)</label>
-                                        <input
-                                            type="text"
-                                            name="institution"
-                                            value={formData.institution}
-                                            onChange={handleChange}
-                                            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary outline-none"
-                                            placeholder="Ej: Banco Nación"
-                                        />
-                                    </div>
-
-                                    <div>
                                         <label className="block text-sm font-medium text-slate-700 mb-1">Email de Contacto</label>
                                         <input
                                             type="email"
@@ -282,13 +269,6 @@ const Register = () => {
                                                     <option value="Intermedio">Intermedio</option>
                                                     <option value="Avanzado">Avanzado</option>
                                                 </select>
-                                                <input
-                                                    type="text"
-                                                    placeholder="DNI (Opcional)"
-                                                    value={player.dni}
-                                                    onChange={(e) => handlePlayerChange(index, 'dni', e.target.value)}
-                                                    className="px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-1 focus:ring-primary outline-none"
-                                                />
                                             </div>
                                         </div>
                                     ))}
