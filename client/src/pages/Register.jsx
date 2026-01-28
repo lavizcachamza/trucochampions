@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { API_URL } from '../config';
 
 const Register = () => {
     const [step, setStep] = useState(1);
@@ -54,7 +55,7 @@ const Register = () => {
         setLoading(true);
 
         try {
-            const res = await axios.post('http://localhost:3001/api/teams/register', formData);
+            const res = await axios.post(`${API_URL}/api/teams/register`, formData);
             if (res.data.success) {
                 setSuccessData(res.data.team);
                 setStep(3); // Success Step

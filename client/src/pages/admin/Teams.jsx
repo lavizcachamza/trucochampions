@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Search, CheckCircle, XCircle, QrCode } from 'lucide-react';
+import { API_URL } from '../../config';
 
 const Teams = () => {
     const [teams, setTeams] = useState([]);
@@ -98,8 +99,8 @@ const Teams = () => {
                                     <button
                                         onClick={() => handleStatusChange(team.id, team.status)}
                                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition ${team.status === 'checkin'
-                                                ? 'bg-yellow-50 text-yellow-700 hover:bg-yellow-100'
-                                                : 'bg-green-50 text-green-700 hover:bg-green-100'
+                                            ? 'bg-yellow-50 text-yellow-700 hover:bg-yellow-100'
+                                            : 'bg-green-50 text-green-700 hover:bg-green-100'
                                             }`}
                                     >
                                         {team.status === 'checkin' ? 'Deshacer' : 'Acreditar'}

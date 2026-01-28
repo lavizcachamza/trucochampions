@@ -3,8 +3,9 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import io from 'socket.io-client';
 import { Plus, Minus, Save, Clock } from 'lucide-react';
+import { API_URL } from '../config';
 
-const socket = io('http://localhost:3001');
+const socket = io(API_URL);
 
 const Referee = () => {
     // For MVP, if we dont access via ID, we might just list all live matches to pick one.
@@ -31,7 +32,7 @@ const Referee = () => {
 
     const fetchMatches = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/matches/live');
+            const res = await axios.get(`${API_URL}/api/matches/live`);
             setMatches(res.data);
         } catch (err) {
             console.error(err);
@@ -53,7 +54,7 @@ const Referee = () => {
         setSelectedMatch({ ...selectedMatch, ...newScore });
 
         try {
-            await axios.put(`http://localhost:3001/api/matches/${selectedMatch.id}/score`, {
+            await axios.put(`${API_URL}/api/matches/${selectedMatch.id}/score`, {
                 ...newScore,
                 status: 'live' // Ensure it's live
             });
@@ -67,7 +68,7 @@ const Referee = () => {
         if (!window.confirm(`¿Finalizar partido?\n${selectedMatch.team_home.name}: ${selectedMatch.score_home}\n${selectedMatch.team_away.name}: ${selectedMatch.score_away}`)) return;
 
         try {
-            await axios.put(`http://localhost:3001/api/matches/${selectedMatch.id}/score`, {
+            await axios.put(`${API_URL}/api/matches/${selectedMatch.id}/score`, {
                 score_home: selectedMatch.score_home,
                 score_away: selectedMatch.score_away,
                 status: 'finished'

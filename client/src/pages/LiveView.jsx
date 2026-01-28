@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
+import { API_URL } from '../config';
 
-const socket = io('http://localhost:3001');
+const socket = io(API_URL);
 
 const LiveView = () => {
     const [matches, setMatches] = useState([]);
@@ -19,7 +20,7 @@ const LiveView = () => {
 
     const fetchMatches = async () => {
         try {
-            const res = await axios.get('http://localhost:3001/api/matches/live');
+            const res = await axios.get(`${API_URL}/api/matches/live`);
             setMatches(res.data);
         } catch (err) {
             console.error(err);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Users, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
+import { API_URL } from '../../config';
 
 const StatCard = ({ title, value, icon: Icon, color }) => (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100 flex items-center justify-between">

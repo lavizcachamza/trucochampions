@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PlayCircle, Clock, CheckCircle } from 'lucide-react';
+import { API_URL } from '../../config';
 
 const Fixture = () => {
     const [round, setRound] = useState(null);
@@ -12,7 +13,7 @@ const Fixture = () => {
         try {
             // Hardcoded for MVP: Generate for 'Pareja' or 'Trio'
             // Ideally we select which category we want to run
-            const res = await axios.post('http://localhost:3001/api/rounds/generate', { category });
+            const res = await axios.post(`${API_URL}/api/rounds/generate`, { category });
             if (res.data.success) {
                 alert('Fixture generado con éxito!');
                 fetchCurrentRound();
