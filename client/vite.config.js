@@ -10,7 +10,7 @@ export default defineConfig({
     allowedHosts: [
       'localhost',
       '127.0.0.1',
-      '192.168.172.221'
+      '192.168.172.221',
       'trucochamp.mansaoferta.com.ar'
     ]
   }
